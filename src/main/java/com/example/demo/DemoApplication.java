@@ -15,9 +15,14 @@ public class DemoApplication {
         return "Hello World HAAANK - uppdaterad i GITHUB";
     }
 
-    @RequestMapping("/live")
-    String live() {
-        return "ok";
+    @RequestMapping(
+        value = "/hello2", 
+        method = RequestMethod.GET, 
+        produces="application/json"
+    ) 
+    @ResponseBody
+    public String hello2() {
+        return "{\"testar\": \"Hello Hank using JSON\"}";
     }
     
     public static void main(String[] args) {
