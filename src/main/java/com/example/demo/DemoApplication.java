@@ -27,6 +27,11 @@ public class DemoApplication {
         return "{\"testar\": \"Hello Hank using JSON\"}";
     }
     
+    @RequestMapping("/hello")
+    String hello() {
+    	return "{\"testar\": \"Hello Hank using JSON\"}";
+    }
+    
     public static void main(String[] args) {
         SpringApplication.run(DemoApplication.class, args);
     }
