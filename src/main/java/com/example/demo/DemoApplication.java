@@ -14,7 +14,8 @@ public class DemoApplication {
 
     @RequestMapping("/")
     String home() {
-        return "Hello World HAAANK - uppdaterad i GITHUB";
+    	System.out.println("GOT A HIT - HOME");
+    	return "Hello World HAAANK - uppdaterad i GITHUB";
     }
 
     @RequestMapping(
@@ -24,11 +25,13 @@ public class DemoApplication {
     ) 
     @ResponseBody
     public String hello2() {
-        return "{\"testar\": \"Hello Hank using JSON\"}";
+    	System.out.println("GOT A HIT - HELLO2");
+    	return "{\"testar\": \"Hello Hank using JSON\"}";
     }
     
     @RequestMapping("/hello")
     String hello() {
+    	System.out.println("GOT A HIT - HELLO");
     	return "{\"testar\": \"Hello Hank using JSON\"}";
     }
     
