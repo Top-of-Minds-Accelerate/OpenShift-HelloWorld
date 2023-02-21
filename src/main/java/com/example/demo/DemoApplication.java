@@ -56,7 +56,20 @@ public class DemoApplication {
     	
     	return out;
     }
+
+    @RequestMapping("/mongo_coll")
+    String mongo_coll() {
+    	System.out.println("Trying MONGO Collections");
+    	
+    	MongoDbConsumer mongo = new MongoDbConsumer();
+    	String out = mongo.getCollection("products");
+    	
+    	return out;
+    }
+
     
+    
+  
     
     public static void main(String[] args) {
         SpringApplication.run(DemoApplication.class, args);
