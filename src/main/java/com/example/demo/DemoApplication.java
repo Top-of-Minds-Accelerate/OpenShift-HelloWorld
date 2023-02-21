@@ -46,6 +46,16 @@ public class DemoApplication {
     	
     	return jsonData;
     }
+
+    @RequestMapping("/mongo")
+    String mongo() {
+    	System.out.println("Trying MONGO");
+    	
+    	MongoDbConsumer mongo = new MongoDbConsumer();
+    	String out = mongo.pingMongo();
+    	
+    	return out;
+    }
     
     
     public static void main(String[] args) {
