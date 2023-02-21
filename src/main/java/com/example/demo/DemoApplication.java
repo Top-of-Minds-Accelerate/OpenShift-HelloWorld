@@ -57,7 +57,7 @@ public class DemoApplication {
     	return out;
     }
 
-    @RequestMapping("/mongo_coll")
+    @RequestMapping(value = "/mongo_coll", method = RequestMethod.GET, produces="application/json")
     String mongo_coll() {
     	System.out.println("Trying MONGO Collections");
     	

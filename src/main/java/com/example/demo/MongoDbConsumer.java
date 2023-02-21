@@ -59,19 +59,24 @@ public class MongoDbConsumer {
             	FindIterable<Document> iterable = collection.find(); // (1)
             	MongoCursor<Document> cursor = iterable.iterator(); // (2)
             	
+            	String outResult = "{\"root\" :[";
+            	
             	try {
 
             		while(cursor.hasNext()) {
             	
-            			System.out.println(cursor.next());
+            			outResult = outResult + cursor.next().toString().replace("Document", "");
+            			System.out.println(outResult);
             		}
             	} 
             		finally {
             			cursor.close();
             	}            	          	
             	
+            	outResult = outResult + "]}";
+            	
             	System.out.println("Success...done");
-                return "SUCCESS - Check the logs";	
+                return outResult;	
             } 
             catch (MongoException me) {
                 System.err.println("An error occurred while attempting to run a command: " + me);
