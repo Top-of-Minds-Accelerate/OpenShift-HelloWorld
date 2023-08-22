@@ -45,31 +45,7 @@ public class DemoApplication {
     	String jsonData = Consumer.getDataFromExternalSource();
     	
     	return jsonData;
-    }
-
-    @RequestMapping("/mongo")
-    String mongo() {
-    	System.out.println("Trying MONGO");
-    	
-    	MongoDbConsumer mongo = new MongoDbConsumer();
-    	String out = mongo.pingMongo();
-    	
-    	return out;
-    }
-
-    @RequestMapping(value = "/mongo_coll", method = RequestMethod.GET, produces="application/json")
-    String mongo_coll() {
-    	System.out.println("Trying MONGO Collections");
-    	
-    	MongoDbConsumer mongo = new MongoDbConsumer();
-    	String out = mongo.getCollection("products");
-    	
-    	return out;
-    }
-
-    
-    
-  
+    } 
     
     public static void main(String[] args) {
         SpringApplication.run(DemoApplication.class, args);
