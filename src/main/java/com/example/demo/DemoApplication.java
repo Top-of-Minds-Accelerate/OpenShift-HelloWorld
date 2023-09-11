@@ -19,34 +19,48 @@ public class DemoApplication {
     }
 
     @RequestMapping(
-        value = "/hello2", 
-        method = RequestMethod.GET, 
+        value = "/hello2",
+        method = RequestMethod.GET,
         produces="application/json"
-    ) 
+    )
     @ResponseBody
     public String hello2() {
     	System.out.println("GOT A HIT - HELLO2");
     	return "{\"testar\": \"Hello Micke using JSON\"}";
     }
-    
+
     @RequestMapping("/hello")
     String hello() {
     	System.out.println("GOT A HIT - HELLO");
     	return "{\"testar\": \"Hello Micke using JSON\"}";
     }
 
-    @RequestMapping(value = "/xrates", method = RequestMethod.GET, produces="application/json") 
+    @RequestMapping(value = "/xrates", method = RequestMethod.GET, produces="application/json")
     String xrates() {
-    	
+
     	// Log
     	System.out.println("Request for X-RATES received ");
 
     	ExchangeRateConsumer Consumer = new ExchangeRateConsumer();
     	String jsonData = Consumer.getDataFromExternalSource();
-    	
+
     	return jsonData;
-    } 
-    
+    }
+
+    @RequestMapping(value = "/bosse", method = RequestMethod.GET, produces="application/json")
+    String bosse() {
+
+    	// Log
+    	System.out.println("Ask BOSSE for distance ");
+
+    	BosseAPI bosse = new BosseAPI();
+    	String jsonData = bosse.getDistanceFromBosse();
+
+    	return jsonData;
+    }
+
+
+
     public static void main(String[] args) {
         SpringApplication.run(DemoApplication.class, args);
     }
