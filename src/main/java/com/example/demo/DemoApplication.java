@@ -12,33 +12,40 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @SpringBootApplication
 public class DemoApplication {
 
+
+    /**
+    * The ROOT of the API. Just return a hello
+    * @return A nice text
+    */
     @RequestMapping("/")
     String home() {
-    	System.out.println("GOT A HIT - HOME");
-    	return "Hello World BOS COMING UP";
+    	System.out.println("GOT A HIT - root");
+    	return "Hello World - Welcome to OPEN SHIFT BOS";
     }
 
+    /**
+    * Endpoint to return a JSON object
+    * @return   A nice JSON object
+    */
     @RequestMapping(
-        value = "/hello2",
+        value = "/hello",
         method = RequestMethod.GET,
         produces="application/json"
     )
     @ResponseBody
-    public String hello2() {
-    	System.out.println("GOT A HIT - HELLO2");
-    	return "{\"testar\": \"Hello Micke using JSON\"}";
+    public String hello() {
+    	System.out.println("GOT A HIT - Hello2");
+    	return "{\"testar\": \"Hello TEAM using JSON\"}";
     }
 
-    @RequestMapping("/hello")
-    String hello() {
-    	System.out.println("GOT A HIT - HELLO");
-    	return "{\"testar\": \"Hello Micke using JSON\"}";
-    }
-
+    /**
+    * sample ENDPOINT hitting an external API to fetch exchange rates!
+    * @return   A nice JSON object with XRATES
+    */
     @RequestMapping(value = "/xrates", method = RequestMethod.GET, produces="application/json")
     String xrates() {
 
-    	// Log
+    	// Log to console
     	System.out.println("Request for X-RATES received ");
 
     	ExchangeRateConsumer Consumer = new ExchangeRateConsumer();
@@ -47,20 +54,11 @@ public class DemoApplication {
     	return jsonData;
     }
 
-    @RequestMapping(value = "/bosse", method = RequestMethod.GET, produces="application/json")
-    String bosse() {
 
-    	// Log
-    	System.out.println("Ask BOSSE for distance ");
-
-    	BosseAPI bosse = new BosseAPI();
-    	String jsonData = bosse.getDistanceFromBosse();
-
-    	return jsonData;
-    }
-
-
-
+    /**
+    * Defaul MAIN to start the APP
+    * @return   A nice JSON object with XRATES
+    */
     public static void main(String[] args) {
         SpringApplication.run(DemoApplication.class, args);
     }
