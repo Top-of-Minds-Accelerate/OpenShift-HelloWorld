@@ -24,7 +24,7 @@ public class DemoApplication {
     }
 
     @RequestMapping("/oskar")
-    String home() {
+    String oskar() {
     	System.out.println("TJA JAG ÄR OSKAR!!! ");
     	return "Hello World - TJA JAG ÄR OSKAR!!! ";
     }
