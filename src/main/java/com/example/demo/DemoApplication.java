@@ -23,6 +23,14 @@ public class DemoApplication {
     	return "Hello World - Welcome to OPEN SHIFT BOS";
     }
 
+    @RequestMapping("/oskar")
+    String home() {
+    	System.out.println("TJA JAG ÄR OSKAR!!! ");
+    	return "Hello World - TJA JAG ÄR OSKAR!!! ";
+    }
+
+
+    
     /**
     * Endpoint to return a JSON object
     * @return   A nice JSON object
