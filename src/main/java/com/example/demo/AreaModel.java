@@ -14,11 +14,21 @@ import java.io.InputStreamReader;
 
 public class AreaModel {
 
+	public AreaModel(int width, int heightMid, int heightTotal) {
+		this._width = width;
+		this._heightMid = heightMid;
+		this._heightTotal = heightTotal;
+	}
+
 	int _width = 0;
 	int _heightMid = 0;
 	int _heightTotal = 0;
 	int _robotBase = 240;
-	
+
+	public AreaModel() {
+
+	}
+
 	public void setWidth(int value)
 	{
 		_width = value;
@@ -35,13 +45,8 @@ public class AreaModel {
 	
 	// get AREA in mm2 
 	public int getArea() {
-
-		int area = 0;
-	
-		int areaHalv = _width * _heightTotal - ((_heightTotal - _heightMid) / 2);
-		area = areaHalv * 2;
-		
-		return area;
+		int areaHalv = _width * _heightTotal - (((_heightTotal - _heightMid) * _width) / 2);
+		return areaHalv * 2;
 	}
 
 

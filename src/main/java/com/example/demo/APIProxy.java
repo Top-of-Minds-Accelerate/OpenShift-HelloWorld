@@ -3,52 +3,45 @@ package com.example.demo;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
-import com.fasterxml.jackson.core.JsonParser;
+import com.example.demo.api.MeasureDistanceResponse;
+import com.example.demo.api.MoveForwardResponse;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.net.HttpURLConnection;
 import java.net.URI;
-import java.net.URL;
 import java.net.http.HttpClient;
 import java.io.IOException;
-import java.io.InputStreamReader;
 
 public class APIProxy {
 
 	String baseURI = "http://robot-api-v4-accelerate-lab-v2.apps-crc.testing/v2/robot/";
 	
+	ObjectMapper objectMapper = new ObjectMapper();
 
-	public String forward(int mm) {
+	public MoveForwardResponse moveForward(int mm) {
 
-		String uri = baseURI + "forward?distance=" + mm;
+		String uriString = baseURI + "forward?distance=" + mm;
 
-		// Skapa request till EXCHANGE RATE API
 		HttpRequest request = HttpRequest.newBuilder()
-				.uri(URI.create(uri))
+				.uri(URI.create(uriString))
 				.method("PUT", HttpRequest.BodyPublishers.noBody())
 				.build();
 
-		// Response konstruktor
-		HttpResponse<String> response = null;
-
-		// Kör!!
 		try {
-			response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+			HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+			System.out.println(response.body());
+
+			return objectMapper.readValue(response.body(), MoveForwardResponse.class);
 		} 
-		catch (IOException e) {
+		catch (IOException | InterruptedException e) {
 			e.printStackTrace();
 		} 
-		catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		
-		// Logga kan ju vara kul...
-		System.out.println(response.body());				
-		
-		return response.body();
+		throw new IllegalStateException("No response received");
 	}
 
+
+
 	
-	public String resetDistance() {
+	public String resetCamera() {
 
 		String uri = baseURI + "sensor/angle?degrees=180";
 
@@ -80,49 +73,25 @@ public class APIProxy {
 	
 	
 
-	public String measure() {
+	public MeasureDistanceResponse measure() {
 
 		String uri = baseURI + "sensor/distance";
 
-		// Skapa request till EXCHANGE RATE API
 		HttpRequest request = HttpRequest.newBuilder()
 				.uri(URI.create(uri))
 				.method("GET", HttpRequest.BodyPublishers.noBody())
 				.build();
 
-		// Response konstruktor
-		HttpResponse<String> response = null;
-
-		// Kör!!
 		try {
-			response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
-		} 
-		catch (IOException e) {
-			e.printStackTrace();
-		} 
-		catch (InterruptedException e) {
+			HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+			System.out.println(response.body());
+			return objectMapper.readValue(response.body(), MeasureDistanceResponse.class);
+		}
+		catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		// Logga kan ju vara kul...
-		System.out.println(response.body());
-
-		return response.body();
+		throw new IllegalStateException("No response received");
 	}
-	
-	
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

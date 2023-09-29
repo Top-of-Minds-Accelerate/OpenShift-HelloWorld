@@ -4,6 +4,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
 import com.fasterxml.jackson.core.JsonParser;
+import org.springframework.stereotype.Component;
 
 import java.net.HttpURLConnection;
 import java.net.URI;
@@ -12,9 +13,10 @@ import java.net.http.HttpClient;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+@Component
 public class ExchangeRateConsumer {
 
-	
+
 	public String getDataFromExternalSource() {
 
 
