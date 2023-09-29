@@ -20,7 +20,7 @@ public class DemoApplication {
     @RequestMapping("/")
     String home() {
     	System.out.println("GOT A HIT - root");
-    	return "Hello World - Welcome to OPEN SHIFT BOS";
+    	return "Hello World - Welcome to OPEN SHIFT BOS 2";
     }
 
     /**
