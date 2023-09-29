@@ -14,7 +14,7 @@ import java.io.InputStreamReader;
 
 public class APIProxy {
 
-	String baseURI = "https://robot-api-v4-accelerate-lab-v2.apps-crc.testing/v2/robot/";
+	String baseURI = "http://robot-api-v4-accelerate-lab-v2.apps-crc.testing/v2/robot/";
 	
 
 	public String forward(int mm) {
