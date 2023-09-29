@@ -12,6 +12,22 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @SpringBootApplication
 public class DemoApplication {
 
+	
+	
+	
+    @RequestMapping(value = "/reset", method = RequestMethod.GET, produces="application/json")
+    String reset() {
+
+    	// Log to console
+    	System.out.println("Reset distance....");
+
+    	APIProxy Consumer = new APIProxy();
+    	String jsonData = Consumer.resetDistance();
+
+    	return jsonData;
+    }
+	
+	
 
     /**
     * The ROOT of the API. Just return a hello
