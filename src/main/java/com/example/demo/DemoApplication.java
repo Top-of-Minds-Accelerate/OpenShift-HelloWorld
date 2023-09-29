@@ -35,7 +35,7 @@ public class DemoApplication {
     @ResponseBody
     public String hello() {
     	System.out.println("GOT A HIT - Hello2");
-    	return "{\"testar\": \"Hello TEAM using JSON\"}";
+    	return "{\"testar\": \"Hello Olle using JSON\"}";
     }
 
     /**
