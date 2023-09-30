@@ -13,13 +13,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @SpringBootApplication
 public class DemoApplication {
 
+    private static final int LEFT = 180;
+    private static final int FORWARD = 90;
 
     @RequestMapping(value = "/measurearea", method = RequestMethod.POST, produces="application/json")
     AreaResponse measureArea() {
 
         APIProxy apiProxy = new APIProxy();
 
-        apiProxy.resetCamera();
+        apiProxy.moveCamera(LEFT);
 
         int initialDistanceToWall = apiProxy.measure().distance();
         int distanceTravelled = 0;
@@ -31,7 +33,7 @@ public class DemoApplication {
         } while(distanceToWallDiff < 20);
 
         //Mät rakt fram
-
+        apiProxy.moveCamera(FORWARD);
         int remainingDistance = apiProxy.measure().distance();
         AreaModel areaModel = new AreaModel(initialDistanceToWall, distanceTravelled, distanceTravelled + remainingDistance);
         return new AreaResponse(areaModel.getArea());
@@ -45,7 +47,7 @@ public class DemoApplication {
     	System.out.println("Reset distance....");
 
     	APIProxy Consumer = new APIProxy();
-    	String jsonData = Consumer.resetCamera();
+    	String jsonData = Consumer.moveCamera(FORWARD);
 
     	return jsonData;
     }

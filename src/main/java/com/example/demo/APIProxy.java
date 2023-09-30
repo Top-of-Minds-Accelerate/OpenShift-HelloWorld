@@ -41,9 +41,9 @@ public class APIProxy {
 
 
 	// 90 rakt fram, 180 vänster...
-	public String moveCamera(int grader) {
+	public String moveCamera(int degrees) {
 
-		String uri = baseURI + "sensor/angle?degrees=" + grader;
+		String uri = baseURI + "sensor/angle?degrees=" + degrees;
 
 		// Skapa request till EXCHANGE RATE API
 		HttpRequest request = HttpRequest.newBuilder()
