@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -61,6 +62,43 @@ public class DemoApplication {
     */
     public static void main(String[] args) {
         SpringApplication.run(DemoApplication.class, args);
+
+        int fullLength = -1;
+        int baseLength = -1;
+        int degSteps = 10;
+
+        RobotController robot = new RobotController();
+        try {
+            fullLength = robot.getDistance();
+            System.out.println("First Distance:  " + fullLength);
+
+            robot.setAngle(0);
+            baseLength = robot.getDistance();
+            int step = 0;
+            int area, currentDist, lastDist = -1;
+
+            lastDist = baseLength;
+            while(baseLength <= fullLength) {
+                step++;
+                robot.setAngle(step * degSteps);
+                currentDist = robot.getDistance();
+
+                int currentArea = 0.5 * lastDist * currentDist * Math.sin((double)degSteps);
+                area += currentArea;
+                lastDist = currentDist;
+
+                baseLength = fullLength + 1;
+            }
+
+            System.out.println("Area: " + area);
+
+
+
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+
+        return;
     }
 
 }
