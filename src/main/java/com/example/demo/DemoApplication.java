@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
+
 
 @RestController
 @SpringBootApplication
@@ -15,6 +17,8 @@ public class DemoApplication {
 
     private static final int LEFT = 180;
     private static final int FORWARD = 90;
+
+    private static final int ROBOT_LENGTH = 240;
 
     @RequestMapping(value = "/measurearea", method = RequestMethod.POST, produces="application/json")
     AreaResponse measureArea() {
@@ -24,13 +28,13 @@ public class DemoApplication {
         apiProxy.moveCamera(LEFT);
 
         int initialDistanceToWall = apiProxy.measure().distance();
-        int distanceTravelled = 0;
+        int distanceTravelled = ROBOT_LENGTH;
         int distanceToWallDiff = 0;
         do {
             distanceTravelled += apiProxy.moveForward(50).distanceMoved();
             int distanceToWall = apiProxy.measure().distance();
             distanceToWallDiff = Math.abs(initialDistanceToWall - distanceToWall);
-        } while(distanceToWallDiff < 20);
+        } while(distanceToWallDiff < 30);
 
         //Mät rakt fram
         apiProxy.moveCamera(FORWARD);

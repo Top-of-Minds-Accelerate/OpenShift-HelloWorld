@@ -22,7 +22,7 @@ class AreaModelTest {
 
     private static Stream<Arguments> measureData() {
         return Stream.of(
-                Arguments.of(5, 10, 15, 126)
+                Arguments.of(10, 20, 30, 500)
         );
     }
 }
