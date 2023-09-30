@@ -23,7 +23,7 @@ public class RobotController {
 
 
 
-    public int getDistance() throws JsonProcessingException {
+    public double getDistance() throws JsonProcessingException {
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("http://robotics-api-robotics.apps-crc.testing/v2/robot/sensor/distance"))
@@ -31,9 +31,18 @@ public class RobotController {
                 .build();
 
         HttpResponse<String> response = null;
+        double resultDistance = 0;
 
+        ObjectMapper objectMapper = new ObjectMapper();
         try {
-            response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+            for(int i = 0; i < 5; i++) {
+                response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+
+                Distance dist = objectMapper.readValue(response.body(), Distance.class);
+                resultDistance += dist.distance;
+            }
+
+            resultDistance = resultDistance / 5;
         }
         catch (IOException e) {
             e.printStackTrace();
@@ -42,11 +51,7 @@ public class RobotController {
             e.printStackTrace();
         }
 
-        // Logga kan ju vara kul...
-        //System.out.println(response.body());
-        ObjectMapper objectMapper = new ObjectMapper();
-        Distance dist = objectMapper.readValue(response.body(), Distance.class);
-        return dist.distance;
+        return resultDistance;
     }
 
 
