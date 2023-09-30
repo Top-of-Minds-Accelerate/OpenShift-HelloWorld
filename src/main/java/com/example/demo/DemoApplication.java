@@ -34,12 +34,13 @@ public class DemoApplication {
             distanceTravelled += apiProxy.moveForward(50).distanceMoved();
             int distanceToWall = apiProxy.measure().distance();
             distanceToWallDiff = Math.abs(initialDistanceToWall - distanceToWall);
-        } while(distanceToWallDiff < 30);
+        } while(distanceToWallDiff < 50);
 
         //Mät rakt fram
         apiProxy.moveCamera(FORWARD);
         int remainingDistance = apiProxy.measure().distance();
         AreaModel areaModel = new AreaModel(initialDistanceToWall, distanceTravelled, distanceTravelled + remainingDistance);
+        System.out.println("Area: " + areaModel.getArea());
         return new AreaResponse(areaModel.getArea());
     }
     
